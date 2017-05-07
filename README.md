@@ -1,4 +1,4 @@
 # javapedia
 java basic examples to teach Java
 
-1. Example to read a Json file and save it a excel file
+1. Java class example which read from Json file and save the content in an excel file
