@@ -1,16 +1,15 @@
 package com.tintan.controller;
 
 import com.tintan.model.Artista;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -125,5 +124,31 @@ public class ArtistaController {
 
         Artista artista = new Artista(codigo, nombre, (int)edad, (int)pais, categoria, website);
         return artista;
+    }
+
+    public String [] obtenerPaisesFromJson(){
+        System.out.println("Cargando paises...");
+        String paises [] = new String[1000];
+        int paisesCounter = 0;
+        JSONParser parser = new JSONParser();
+        try {
+            Object obj = parser.parse(new FileReader("/Users/cfernandez/Desktop/docencia/tintanapp/paises-array.json"));
+            JSONArray msg = (JSONArray) obj;
+            Iterator<JSONObject> iterator = msg.iterator();
+            while (iterator.hasNext()) {
+                JSONObject jsonObject = (JSONObject) iterator.next();
+                System.out.println(jsonObject);
+                String pais = (String)jsonObject.get("nome");
+                paises[paisesCounter] = pais;
+                paisesCounter++;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return paises;
     }
 }

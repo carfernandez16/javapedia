@@ -79,8 +79,7 @@ public class ArtistasForm{
         edadLabel.setBounds(20,110,80,25);
         component.add(edadLabel);
 
-        String ciudades[] = {"Argentina", "Bolivia", "Chile", "Ecuador",
-                "Colombia", "Per\u00fa", "Brasil", "Paraguay", "Uruguay"};
+        String ciudades[] = getPaises();
         paisComboBox = new JComboBox(ciudades);
         paisComboBox.setBounds(100,110,200,25);
         component.add(paisComboBox);
@@ -161,4 +160,9 @@ public class ArtistasForm{
     }
 
 
+    public String[] getPaises() {
+        ArtistaController artistaController = new ArtistaController();
+        String [] paises = artistaController.obtenerPaisesFromJson();
+        return paises;
+    }
 }
